@@ -53,6 +53,9 @@ const reducerFunc = (state, action) => {
       };
     }
   }
+  if(action.type === "removeAllItems") {
+    return initCart
+  }
   return initCart;
 };
 
@@ -67,11 +70,16 @@ const CartProvider = (props) => {
     cartDispatch({ type: "removeItem", itemID: id });
   };
 
+  const removeAllItemHandler = () => {
+    cartDispatch({ type: "removeAllItems" });
+  };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
+    removeAllItem: removeAllItemHandler,
   };
 
   return (
